@@ -39,6 +39,19 @@ def transport(Egrid, vbands = [np.array([1, 1e8, 0])], cbands = [np.array([1, 2e
     
     return t 
 
+def find_bandgap(quantity, egrid):
+    N = len(quantity)
+    Ne = len(egrid)
+    if N != Ne:
+        raise Exception('The two input vectors should have the same dimension')
+        
+    for k in range(N):
+        if quantity[N-k-1] ==0: 
+            band_gap = egrid[N-k-1]
+            break
+    return band_gap
+
+
 def fermi(E, mu, T):
     #Fermi Window (Zeroth Order)
     kB_eV = 8.617332385e-5
